@@ -1,0 +1,103 @@
+
+<html>
+<head>
+<script>
+
+
+	var signup_btn = document.getElementById("signup_btn");
+	
+	signup_btn.onclick= function(){
+   var request= new XMLHttpRequest();
+	
+	request.onreadystatechange= function(){
+    
+	  if(request.readyState===XMLHttpRequest.DONE){
+	     
+		 if(request.status===200) 
+		  {  
+		  document.getElementById("pre").innerHTML= "<h3>"+" Welcome ! "+"<span style=color:blue>" + username + "</span>" + " please" + "  <a href=/ class=hyperlinks2>" + "<kbd>" +" Sign in "+"</kbd>" + "<a/>" + "  </h3>";
+		  }
+		  else 
+		  { 
+			document.getElementById("error_msg").innerHTML= "Username is already taken/password too short "+"<br>";
+		    document.getElementById("signup_btn").value= "Sign up";
+		  }
+     }		  	  
+	
+}      
+	var username= document.getElementById("username").value;
+	var password= document.getElementById("password").value;
+	var signup=document.getElementById("signup_btn");
+	request.open('POST', "http://auth.vcap.me/signup", true);
+	request.setRequestHeader('Content-type','application/json');
+	request.send(JSON.stringify({username:username,password:password})); 
+	signup_btn.value="Signing-up...";
+	
+
+
+};  		
+</script>  
+<style>
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+	allign: center;
+}
+/* Float cancel and signup buttons and add an equal width */
+.signupbtn {
+    float: left;
+    width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .signupbtn {
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body>
+<form action="login.html">
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter name" id="username" required/>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" required/>
+    <input type="checkbox" checked="checked"/> Remember me
+        <div class="clearfix">
+      <input type="button" value="sign up" id="signup_btn" style="align: center;"/>
+	  <input type="button" value="Sign up" class="btn btn-success" id="signup_btn">
+    </div>
+  </div>
+</form>
+</body>
+</html>

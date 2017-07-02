@@ -1,0 +1,31 @@
+
+
+	var signup_btn = document.getElementById("signup_btn");
+	
+	signup_btn.onclick= function()
+{ 
+
+   var request= new XMLHttpRequest();
+	
+	    request.onreadystatechange= function()
+    {
+	  if(request.readyState===XMLHttpRequest.DONE && request.status===200) 
+		  {  
+		  document.getElementById("pre").innerHTML= "Sign up success ! Welcome member please sign in to start";}
+		else 
+			{ document.getElementById("signup_btn").value= "Oops ! somthing went wrong";}
+		  	  
+	
+  }
+	var username= document.getElementById("username").value;
+	var password= document.getElementById("password").value;
+	var signup=document.getElementById("signup_btn");
+	request.open('POST', " https://auth.veejay84.hasura-app.io/signup", true);
+	request.setRequestHeader('Content-type','application/json');
+	request.send(JSON.stringify({username:username,password:password}));
+	signup_btn.value="Please wait...";
+	
+};  
+		
+
+		
